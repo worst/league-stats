@@ -21,6 +21,7 @@ class Summoner(Entity):
     lname = Field(Unicode(30))
     year = Field(Integer)
     teams = ManyToMany('Team')
+    lolking_profile = Field(Integer)
 
     def __repr__(self):
         return '<%s %s (%s)>' %(self.fname, self.lname, self.summoner_name)
@@ -29,6 +30,7 @@ class Summoner(Entity):
 class Side(Entity):
     color = Field(Integer)
     teams = OneToMany('Team')
+    winners = OneToMany('Game')
 
 
 class Team(Entity):
@@ -40,6 +42,6 @@ class Team(Entity):
 
 class Game(Entity):
     teams = OneToMany('Team')
-    winner = OneToOne('Game')
+    winner = ManyToOne('Side')
     date = Field(Date)
     length = Field(Integer)
