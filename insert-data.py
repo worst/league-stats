@@ -15,7 +15,7 @@ champions = [["""Ahri""","""The Nine-Tailed Fox""",date(2011, 10, 14),"""AhriSqu
 ["""Brand""","""The Burning Vengeance""",date(2011, 8, 12),"""BrandSquare.png""","""brand.jpg"""],
 ["""Caitlyn""","""The Sheriff of Piltover""",date(2011, 11, 04),"""CaitlynSquare.png""","""caitlyn.jpg"""],
 ["""Cassiopeia""","""The Serpent's Embrace""",date(2010, 12, 14),"""CassiopeiaSquare.png""","""cassiepeia.jpg"""],
-["""Cho'Gath""","""The Terror of the Void""",date(2009, 6, 26),"""ChogathSquare.png""","""chogath.jpg"""],
+["""Cho'Gath""","""The Terror of the Void""",date(2009, 6, 26),"""ChoGathSquare.png""","""chogath.jpg"""],
 ["""Corki""","""The Daring Bombardier""",date(2009, 9, 19),"""CorkiSquare.png""","""corki.jpg"""],
 ["""Darius""","""The Hand of Noxus""",date(2012, 05, 23),"""DariusSquare.png""","""darius.jpg"""],
 ["""Dr. Mundo""","""The Madman of Zaun""",date(2009, 9, 02),"""DrMundoSquare.png""","""drmundo.jpg"""],
