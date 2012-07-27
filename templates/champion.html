@@ -7,10 +7,11 @@
 </div>
 
 <div class="row" id="champ-info">
-	<img src="{{ root_url }}static/images/champions/splash/{{ champion.name|lower }}.jpg" class="span4 thumbnail">
+	<img id="champion-splash" src="{{ root_url }}static/images/champions/splash/{{ champion.name|lower }}.jpg" class="span4 thumbnail">
 
 	<div class="span6">
-		<h1>{{ champion.name|capitalize }} -- {{ champion.subtitle }}</h1>
+		<h1>{{ champion.name|capitalize }}</h1> 
+		<h6>{{ champion.subtitle }}</h6>
 
 		<p><strong>Released: </strong>{{ champion.release_date }}</p>
 
@@ -19,6 +20,10 @@
 	</div>
 </div>
 
+<div class="row">
+	<div class="span12">
+<h2>{{ champion.name|capitalize }}'s League Statistics</h2>
+
 <div class="well">
 	<h2>Wins: {{ champion.wins }}</h2>
 	<h2>Losses: {{ champion.losses }}</h2>
@@ -26,6 +31,8 @@
 	<h3>Win Percentage: {{ champion.win_percentage }}</h3>
 
 	<h4>Popularity: {{ champion.popularity }}</h4>
+</div>
+</div>
 </div>
 
 <div class="row top-summoners">
@@ -48,6 +55,30 @@
 			<p><strong> Win Percentage: </strong>{{ summoner_percent.win_percentage }}</p>
 		</div>
 	</a>
+</div>
+
+<h2>Recent Matches</h2>
+
+<div class="well">
+	{% for match in matches %}
+	<a href="/game/{{ match.id }}">
+		<div class="well row {{ match.winner }} match-row">
+			<img class="champion-thumbnail" src="{{ match.team1.champion1.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team1.champion2.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team1.champion3.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team1.champion4.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team1.champion5.thumbnail }}">
+
+			<strong>VS</strong>
+
+			<img class="champion-thumbnail" src="{{ match.team2.champion1.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team2.champion2.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team2.champion3.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team2.champion4.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team2.champion5.thumbnail }}">
+		</div>
+	</a>
+	{% endfor %}
 </div>
 
 
