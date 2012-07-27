@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+	<h1>Champions</h1>
+</div>
+
+<ul class="thumbnails">
+	{% for champion in champions %}
+		<li class="">
+			<a href="champions/{{ champion.name|lower }}">
+				<div class="thumbnail">
+					<img src="http://placehold.it/64x64" alt="{{ champion.name }}">
+
+					<span class="champion-name">{{ champion.name }}</span>
+				</div>
+			</a>
+		</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}
