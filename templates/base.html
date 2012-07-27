@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{{ page_title }} -- {{ org }} League Stats</title>
+
+	<link href=static/css/bootstrap.css rel=stylesheet>
+	<link href=static/css/main.css rel=stylesheet>
+
+	<script src=static/css/bootstrap.js></script>
+
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#">League Stats</a>
+				<ul class="nav">
+					<li><a href="{{ root_url }}">Home</a></li>
+					<li><a href="{{ root_url }}summoners">Summoners</a></li>
+					<li><a href="{{ root_url }}champions">Champions</a></li>
+					<li><a href="{{ root_url }}league">League</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+	{% block content %}{% endblock %}
+	</div>
+</body>
