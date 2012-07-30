@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+	<h1>{{ org }} League Statistics</h1>
+</div>
+
+{# 
+	Most Wins
+	Highest Win Percentage
+	Most popular Champion
+	Winningest Champion
+	Number of Games Played
+	10 Most Recent Matches
+#}
+
+<h2>Top Summoners</h2>
+<div id="wins" class="row">
+	<div class="span4">
+		<h3>Most Wins</h3>
+		<h5>{{ most_wins.summoner }}</h5>
+		<span class="label">Wins: </span>
+		<span class="field">{{ most_wins.wins }}</span>
+	</div>
+
+	<div class="span4">
+		<h3>Highest Win Percentage</h3>
+		<h5>{{ percentage.summoner }}</h5>
+		<span class="label">Win Percentage: </span>
+		<span class="field">{{ percentage.wins }}</span>
+	</div>
+
+	<div class="span4">
+		<h3>Most Games</h3>
+		<h5>{{ games.summoner }}</h5>
+		<span class="label"># Games: </span>
+		<span class="field">{{ games.number }}</span>
+	</div>
+</div>
+<br>
+
+<h2>Top Champions</h2>
+<div id="champions" class="row">
+	<div class="span4">
+		<h3 class="center">Most Popular Champion</h3>
+		<div class="row">
+			<div class="span2">
+				<img src="{{ root_url }}static/images/champions/thumbnails/{{ most_popular.thumbnail }}" class="pull-left thumbnail">
+			</div>
+			<div class="span2">
+				<h5>{{ most_popular.champion }}</h5>
+				<span class="label"># Games: </span>
+				<span class="field">{{ most_popular.games }}</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="span4 offset4">
+		<h3 class="center">Winningest Champion</h3>
+		<div class="row">
+			<div class="span2">
+				<img src="{{ root_url }}static/images/champions/thumbnails/{{ winningest.thumbnail }}" class="pull-left thumbnail">
+			</div>
+			<div class="span2">
+				<h5>{{ winningest.champion }}</h5>
+				<span class="label">Win %: </span>
+				<span class="field">{{ winningest.percent }}</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
