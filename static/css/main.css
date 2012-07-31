@@ -1,15 +1,38 @@
+/*---------------------------------------------------
+    LESS Elements 0.6
+  ---------------------------------------------------
+    A set of useful LESS mixins by Dmitry Fadeyev
+    Special thanks for mixin suggestions to:
+      Kris Van Herzeele,
+      Benoit Adam,
+      Portenart Emile-Victor,
+      Ryan Faerman
+
+    More info at: http://lesselements.com
+-----------------------------------------------------*/
 body {
-	margin-top: 40px;
+  margin-top: 40px;
 }
-
-.champion-name{
-	margin-top: 3px;
-	margin-bottom: 3px;
-	text-align: center;
-
-	display: block;
+.champion-name {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  text-align: center;
+  display: block;
 }
-
-#champion-splash{
-	margin-bottom: 20px;
+#champion-splash {
+  margin-bottom: 20px;
+}
+.info-block {
+  text-align: center;
+  background-color: #08C;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 10px;
+}
+.info-block .thumbnail {
+  background-color: #FFFFFF;
 }
