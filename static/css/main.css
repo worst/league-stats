@@ -25,6 +25,7 @@ body {
 .info-block {
   text-align: center;
   background-color: #08C;
+  color: white;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
