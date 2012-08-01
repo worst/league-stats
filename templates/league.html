@@ -20,21 +20,21 @@
 	<div class="span4 info-block">
 		<h3>Most Wins</h3>
 		<h5>{{ most_wins.summoner }}</h5>
-		<span class="label">Wins: </span>
+		<span class="tag">Wins: </span>
 		<span class="field">{{ most_wins.wins }}</span>
 	</div>
 
 	<div class="span4 info-block">
 		<h3>Highest Win Percentage</h3>
 		<h5>{{ percentage.summoner }}</h5>
-		<span class="label">Win Percentage: </span>
+		<span class="tag">Win Percentage: </span>
 		<span class="field">{{ percentage.wins }}</span>
 	</div>
 
 	<div class="span4 info-block">
 		<h3>Most Games</h3>
 		<h5>{{ games.summoner }}</h5>
-		<span class="label"># Games: </span>
+		<span class="tag"># Games: </span>
 		<span class="field">{{ games.number }}</span>
 	</div>
 </div>
@@ -50,7 +50,7 @@
 			<div>
 		<h3 class="center">Most Popular</h3>
 				<h5>{{ most_popular.champion }}</h5>
-				<span class="label"># Games: </span>
+				<span class="tag"># Games: </span>
 				<span class="field">{{ most_popular.games }}</span>
 			</div>
 		</div>
@@ -64,11 +64,36 @@
 			<div>
 		<h3 class="center">Winningest</h3>
 				<h5>{{ winningest.champion }}</h5>
-				<span class="label">Win %: </span>
+				<span class="tag">Win %: </span>
 				<span class="field">{{ winningest.percent }}</span>
 			</div>
 		</div>
 	</div>
+</div>
+<br>
+
+<h2>Recent Matches</h2>
+
+<div class="well">
+	{% for match in matches %}
+	<a href="/game/{{ match.id }}">
+		<div class="well row {{ match.winner }} match-row">
+			<img class="champion-thumbnail" src="{{ match.team1.champion1.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team1.champion2.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team1.champion3.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team1.champion4.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team1.champion5.thumbnail }}">
+
+			<strong>VS</strong>
+
+			<img class="champion-thumbnail" src="{{ match.team2.champion1.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team2.champion2.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team2.champion3.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team2.champion4.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team2.champion5.thumbnail }}">
+		</div>
+	</a>
+	{% endfor %}
 </div>
 
 {% endblock %}
