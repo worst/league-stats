@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import *
 app = Flask(__name__)
 
 @app.route('/')
@@ -47,6 +47,16 @@ def league():
 
 	return render_template('league.html', page_title="League Statistics", org="CWRU", root_url="../", most_wins=most_wins, percentage=percentage, games=games, most_popular=most_popular, winningest=winningest)
 
+@app.route('/summoners', methods=['GET', 'POST'])
+def summoners():
+	if request.method == 'POST':
+		#Get results here
+		search_string = request.form['search-term']
+		results = []
+		return render_template('summoner-search-results.html', page_title='Summoners', org='CWRU', root_url='../', results=results, search=search_string)
+	else:
+		return render_template('summoner-search.html', page_title='Summoners', org='CWRU', root_url='../')
+
 if __name__ == '__main__':
 	app.debug = True
-	app.run()
+	app.run(host='0.0.0.0')
