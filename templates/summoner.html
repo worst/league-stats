@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="page-header">
+	<h1>Summoner Information</h1>
+</div>
+
+<div class="row">
+	<img src="{{ root_url }}static/images/summoners/{{ summoner.image }}" class="span4 thumbnail">
+
+	<div class="span6">
+		<h1>{{ summoner.name|capitalize }}</h1>
+		<p><strong>LoL King Profile: </strong><a href="http://www.lolking.net/summoner/na/{{ summoner.lolking_id }}">http://www.lolking.net/summoner/na/{{ summoner.lolking_id }}</a></p>
+	</div>
+</div>
+<br>
+
+<h2>{{ summoner.name|capitalize }}'s League Statistics</h2>
+<div class="row">
+	<div class="span12">
+
+		<div class="well">
+			<h2>Wins: {{ summoner.wins }}</h2>
+			<h2>Losses: {{ summoner.losses }}</h2>
+
+			<h3>Win Percentage: {{ summoner.win_percentage }}</h3>
+
+			<h4>Overall Rank: {{ summoner.rank }}</h4>
+		</div>
+	</div>
+</div>
+
+<h2>Top Champions</h2>
+<div class="row-fluid">
+	<div class="span4 info-block">
+		<div class="row-fluid">
+			<div class="span4">
+				<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_wins.thumbnail }}" class="thumbnail">
+			</div>
+			<div>
+		<h3 class="center">Most Wins</h3>
+				<h5>{{ champ_wins.champion }}</h5>
+				<span class="tag"># Games: </span>
+				<span class="field">{{ champ_wins.games }}</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="span4 info-block">
+		<div class="row-fluid">
+			<div class="span4">
+				<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_percent.thumbnail }}" class="thumbnail">
+			</div>
+			<div>
+		<h3 class="center">Highest Win Percentage</h3>
+				<h5>{{ champ_percent.champion }}</h5>
+				<span class="tag">Win %: </span>
+				<span class="field">{{ champ_percent.percent }}</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="span4 info-block">
+		<div class="row-fluid">
+			<div class="span4">
+				<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_popular.thumbnail }}" class="thumbnail">
+			</div>
+			<div>
+		<h3 class="center">Most Used</h3>
+				<h5>{{ champ_popular.champion }}</h5>
+				<span class="tag"># Games: </span>
+				<span class="field">{{ champ_popular.games }}</span>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+
+<h2>Recent Matches</h2>
+
+<div class="well">
+	{% for match in matches %}
+	<a href="/game/{{ match.id }}">
+		<div class="well row {{ match.winner }} match-row">
+			<img class="champion-thumbnail" src="{{ match.team1.champion1.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team1.champion2.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team1.champion3.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team1.champion4.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team1.champion5.thumbnail }}">
+
+			<strong>VS</strong>
+
+			<img class="champion-thumbnail" src="{{ match.team2.champion1.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team2.champion2.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team2.champion3.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team2.champion4.thumbnail }}">
+			<img class="champion-thumbnail" src="{{ match.team2.champion5.thumbnail }}">
+		</div>
+	</a>
+	{% endfor %}
+</div>
+
+{% endblock %}
