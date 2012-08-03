@@ -57,6 +57,21 @@ def summoners():
 	else:
 		return render_template('summoner-search.html', page_title='Summoners', org='CWRU', root_url='../')
 
+@app.route('/summoners/<summoner_id>')
+def summoner_info(summoner_id):
+	summoner = {'name': 'Kihashi', 'fname': 'John', 'lname': 'Cleaver', 'rank': 1, 'lolking_id': 47160, 'win_percentage': 70, 'wins': 10, 'losses': 7}
+	champ_popular = {'champion': 'Amumu',
+					'thumbnail': 'AmumuSquare.png',
+					'games': 90}
+	champ_wins = {'champion': 'Amumu',
+					'thumbnail': 'AmumuSquare.png',
+					'games': 100}
+	champ_percent = {'champion': 'Singed',
+					'thumbnail': 'SingedSquare.png',
+					'percent': 80}
+
+	return render_template('summoner.html', page_title=summoner['name'], org="CWRU", root_url='../../', summoner=summoner, champ_wins=champ_wins, champ_percent=champ_percent, champ_popular=champ_popular)
+
 if __name__ == '__main__':
 	app.debug = True
 	app.run(host='0.0.0.0')
