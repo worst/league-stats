@@ -15,7 +15,7 @@ def champions():
 
 @app.route('/champions/<champ>')
 def champ_info(champ):
-	champion = {'name': champ, 'portrait': "http://placehold.it/320x240", "subtitle": "The Defender of Tomorrow"}
+	champion = Champion.query.filter_by(name=champ).one()
 
 	return render_template('champion.html', page_title=champ, org="CWRU", root_url="../../", champion=champion, summoner_wins='', summoner_percent="")
 
