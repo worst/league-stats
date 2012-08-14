@@ -1,4 +1,6 @@
 from flask import *
+from models import *
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -7,20 +9,7 @@ def index():
 
 @app.route('/champions')
 def champions():
-	champions = [{'name': 'Amumu'}, 
-				 {'name': 'Akali'}, 
-				 {'name': 'Alistar'}, 
-				 {'name': 'Ahri'}, 
-				 {'name': 'Anivia'}, 
-				 {'name': 'Annie'}, 
-				 {'name': 'Ashe'}, 
-				 {'name': 'Blitzcrank'}, 
-				 {'name': 'Brand'}, 
-				 {'name': 'Caitlyn'}, 
-				 {'name': 'Cassiopeia'}, 
-				 {'name': 'Galio'}, 
-				 {'name': 'Gangplank'}, 
-				 {'name': 'Jayce'}]
+	champions = Champion.query.all()
 
 	return render_template('champion_list.html', page_title="Champions", org="CWRU", root_url="../", champions=champions)
 
@@ -73,5 +62,7 @@ def summoner_info(summoner_id):
 	return render_template('summoner.html', page_title=summoner['name'], org="CWRU", root_url='../../', summoner=summoner, champ_wins=champ_wins, champ_percent=champ_percent, champ_popular=champ_popular)
 
 if __name__ == '__main__':
+	setup_all()
+	create_all()
 	app.debug = True
 	app.run(host='0.0.0.0')
