@@ -66,7 +66,7 @@ def summoners():
     if request.method == 'POST':
         #Get results here
         search_string = request.form['search-term']
-        results = []
+        results = Summoner.query.filter_by(summoner_name=search_string)
         return render_template('summoner-search-results.html',
                                page_title='Summoners',
                                org='CWRU',
