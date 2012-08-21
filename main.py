@@ -102,6 +102,14 @@ def summoner_info(summoner_id):
                            champ_percent=champ_percent,
                            champ_popular=champ_popular)
 
+
+@app.route('/upload')
+def start_upload():
+    return render_template('upload.html',
+                           page_title="Upload",
+                           org="CWRU",
+                           root_url="../")
+
 if __name__ == '__main__':
     setup_all()
     create_all()
