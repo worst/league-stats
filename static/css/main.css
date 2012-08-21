@@ -37,3 +37,8 @@ body {
 .info-block .thumbnail {
   background-color: #FFFFFF;
 }
+.center {
+  display: block;
+  margin: 0 auto !important;
+  float: none !important;
+}
