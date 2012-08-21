@@ -7,7 +7,7 @@
 <div class="well">
 	<ul>
 {% for result in results %}
-		<li><a href='summoners/{{ result.summoner_name }}'>{{ result.summoner_name }}</a></li>
+		<li><a href='{{ result.summoner_name }}'>{{ result.summoner_name }}</a></li>
 {% endfor %}
 	</ul>
 </div>
