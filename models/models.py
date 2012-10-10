@@ -45,3 +45,4 @@ class Game(Entity):
     winner = ManyToOne('Side')
     date = Field(Date)
     length = Field(Integer)
+    replay_path = Field(Text())
