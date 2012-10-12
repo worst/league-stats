@@ -22,7 +22,6 @@ class Summoner(Entity):
     lname = Field(Unicode(30))
     year = Field(Integer)
     teams = ManyToMany('Team')
-    lolking_id = Field(Integer)
 
     def __repr__(self):
         return '<%s %s (%s)>' % (self.fname, self.lname, self.summoner_name)
