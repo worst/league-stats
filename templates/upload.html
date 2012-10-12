@@ -7,13 +7,18 @@
 </div>
 
 <div class="row-fluid">
-	<form action="" class="center form well span4" method="post">
+	<form action="" class="center form well span6" method="post" enctype=multipart/form-data>
 		<div class="row-fluid">
 			<div class="center">
 				<input type="file" name="replay-upload">
+				<button type="submit" class="pull-right btn btn-primary btn-large">Upload</button>
 			</div>
 		</div>
 	</form>
 </div>
+
+{% if success %}
+<h2>File Upload Successful</h2>
+{% endif %}
 
 {% endblock %}
