@@ -23,7 +23,6 @@ class UploadParser:
         self.replay_data = json.loads(self.json_string)
 
     def process_replay_data(self):
-        self.parse_summoner_info()
         self.parse_game_info()
         self.parse_team_info()
 
@@ -45,12 +44,6 @@ class UploadParser:
                              replay_path=self.replay_path,
                              winner=Side.get_by(color=winning_side))
 
-    def parse_summoner_info(self):
-        for player in self.replay_data['players']:
-            if Summoner.get_by(summoner_id=player['accountID']) == None:
-                Summoner(summoner_id=player['accountID'],
-                         summoner_name=player['summoner'])
-
     def parse_team_info(self):
         self.team1 = Team(side=Side.get_by(color=1),
                           game=self.new_game)
@@ -58,9 +51,28 @@ class UploadParser:
                           game=self.new_game)
 
         for player in self.replay_data['players']:
-            if player['team'] == 1:
-                self.team1.summoners.append(Summoner.get_by(summoner_id=player['accountID']))
-                self.team1.champions.append(Champion.get_by(name=player['champion']))
+            summoner = Summoner.get_by(summoner_id=player['accountID'])
+            champion = Champion.get_by(name=player['champion'])
+            win_count = 1 if player['won'] == 'true' else 0
+            loss_count = 1 if player['won'] == 'false' else 0
+            summoner_stats = Summoner_Stats(summoner=summoner, champion=champion)
+
+            if summoner == None:
+                Summoner(summoner_id=player['accountID'],
+                         summoner_name=player['summoner'])
+
+            if summoner_stats == None:
+                Summoner_Stats(summoner=summoner, champion=champion, wins=win_count, losses=loss_count)
             else:
-                self.team2.summoners.append(Summoner.get_by(summoner_id=player['accountID']))
-                self.team2.champions.append(Champion.get_by(name=player['champion']))
+                summoner_stats.wins += win_count
+                summoner_stats += loss_count
+
+            summoner.wins += win_count
+            summoner.losses += loss_count
+
+            if player['team'] == 1:
+                self.team1.summoners.append(summoner)
+                self.team1.champions.append(champion)
+            else:
+                self.team2.summoners.append(summoner)
+                self.team2.champions.append(champion)
