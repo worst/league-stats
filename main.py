@@ -1,6 +1,7 @@
 from flask import *
 from models import *
 import parse
+from upload import *
 
 app = Flask(__name__)
 
@@ -104,12 +105,28 @@ def summoner_info(summoner_id):
                            champ_popular=champ_popular)
 
 
-@app.route('/upload')
+@app.route('/upload', methods=['GET', 'POST'])
 def start_upload():
-    return render_template('upload.html',
-                           page_title="Upload",
-                           org="CWRU",
-                           root_url="../")
+    if request.method == 'GET':
+        return render_template('upload.html',
+                               page_title="Upload",
+                               org="CWRU",
+                               root_url="../")
+    elif request.method == 'POST':
+        file = request.files['replay-upload']
+        uploader = Uploader(app)
+
+        if uploader.upload_file(file):
+            parser = parse.UploadParser(uploader.get_upload_path())
+            parser.process_replay_data()
+            return render_template('upload.html',
+                                   page_title="Upload",
+                                   org="CWRU",
+                                   root_url="../",
+                                   success=True)
+        else:
+            return "Upload Failed. Please try it again."
+
 
 if __name__ == '__main__':
     setup_all()
