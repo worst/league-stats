@@ -84,7 +84,7 @@ def summoners():
 
 @app.route('/summoners/<summoner_id>')
 def summoner_info(summoner_id):
-    summoner = {'name': 'Kihashi', 'fname': 'John', 'lname': 'Cleaver', 'rank': 1, 'lolking_id': 47160, 'win_percentage': 70, 'wins': 10, 'losses': 7}
+    summoner = Summoner.get_by(summoner_name=summoner_id)
     champ_popular = {'champion': 'Amumu',
                     'thumbnail': 'AmumuSquare.png',
                     'games': 90}
@@ -96,7 +96,7 @@ def summoner_info(summoner_id):
                     'percent': 80}
 
     return render_template('summoner.html',
-                           page_title=summoner['name'],
+                           page_title=summoner.summoner_name,
                            org="CWRU",
                            root_url='../../',
                            summoner=summoner,
