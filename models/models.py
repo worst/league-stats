@@ -22,6 +22,7 @@ class Summoner(Entity):
     lname = Field(Unicode(30))
     year = Field(Integer)
     teams = ManyToMany('Team')
+    picture = Field(Unicode(30))
 
     def __repr__(self):
         return '<%s %s (%s)>' % (self.fname, self.lname, self.summoner_name)
