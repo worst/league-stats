@@ -56,7 +56,7 @@ class UploadParser:
             champion = Champion.get_by(name=player['champion'])
             win_count = 1 if player['won'] == 'true' else 0
             loss_count = 1 if player['won'] == 'false' else 0
-            summoner_stats = Summoner_Stats(summoner=summoner, champion=champion)
+            summoner_stats = Summoner_Stats.get_by(summoner=summoner, champion=champion)
 
             if summoner == None:
                 Summoner(summoner_id=player['accountID'],
