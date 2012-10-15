@@ -1,6 +1,7 @@
 import json
 from models import *
 from datetime import datetime
+import re
 
 
 class UploadParser:
@@ -19,7 +20,7 @@ class UploadParser:
 
     def extract_json(self):
         self.replay = open(self.replay_path)
-        self.json_string = self.replay.readline()[8:][:-58]
+        self.json_string = re.search("\{.*\}", self.replay.readline()).group()
         self.replay_data = json.loads(self.json_string)
 
     def process_replay_data(self):
