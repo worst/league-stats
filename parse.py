@@ -59,17 +59,19 @@ class UploadParser:
             summoner_stats = Summoner_Stats.get_by(summoner=summoner, champion=champion)
 
             if summoner == None:
-                Summoner(summoner_id=player['accountID'],
-                         summoner_name=player['summoner'])
+                summoner = Summoner(summoner_id=player['accountID'],
+                                    summoner_name=player['summoner'],
+                                    wins=win_count,
+                                    losses=loss_count)
+            else:
+                summoner.wins += win_count
+                summoner.losses += loss_count
 
             if summoner_stats == None:
                 Summoner_Stats(summoner=summoner, champion=champion, wins=win_count, losses=loss_count)
             else:
                 summoner_stats.wins += win_count
                 summoner_stats += loss_count
-
-            summoner.wins += win_count
-            summoner.losses += loss_count
 
             if player['team'] == 1:
                 self.team1.summoners.append(summoner)
