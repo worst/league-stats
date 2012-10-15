@@ -25,8 +25,8 @@ class Summoner(Entity):
     teams = ManyToMany('Team')
     picture = Field(Unicode(30))
     stats = OneToMany('Summoner_Stats')
-    wins = Field(Integer)
-    losses = Field(Integer)
+    wins = Field(Integer, default=0)
+    losses = Field(Integer, default=0)
 
     def __repr__(self):
         return '<%s %s (%s)>' % (self.fname, self.lname, self.summoner_name)
@@ -56,6 +56,6 @@ class Game(Entity):
 class Summoner_Stats(Entity):
     summoner = ManyToOne('Summoner')
     champion = ManyToOne('Champion')
-    games_played = Field(Integer)
-    wins = Field(Integer)
-    losses = Field(Integer)
+    games_played = Field(Integer, default=0)
+    wins = Field(Integer, default=0)
+    losses = Field(Integer, default=0)
