@@ -54,8 +54,8 @@ class UploadParser:
         for player in self.replay_data['players']:
             summoner = Summoner.get_by(summoner_id=player['accountID'])
             champion = Champion.get_by(name=player['champion'])
-            win_count = 1 if player['won'] == 'true' else 0
-            loss_count = 1 if player['won'] == 'false' else 0
+            win_count = 1 if player['won'] == True else 0
+            loss_count = 1 if player['won'] == False else 0
             summoner_stats = Summoner_Stats.get_by(summoner=summoner, champion=champion)
 
             if summoner == None:
@@ -68,10 +68,11 @@ class UploadParser:
                 summoner.losses += loss_count
 
             if summoner_stats == None:
-                Summoner_Stats(summoner=summoner, champion=champion, wins=win_count, losses=loss_count)
+                Summoner_Stats(summoner=summoner, champion=champion, wins=win_count, losses=loss_count, games_played=1)
             else:
                 summoner_stats.wins += win_count
-                summoner_stats += loss_count
+                summoner_stats.losses += loss_count
+                summoner_stats.games_played += 1
 
             if player['team'] == 1:
                 self.team1.summoners.append(summoner)
