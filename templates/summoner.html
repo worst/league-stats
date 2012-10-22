@@ -7,7 +7,7 @@
 </div>
 
 <div class="row">
-	<img src="{{ root_url }}static/images/summoners/{{ summoner.image }}" class="span4 thumbnail">
+	<img src="{% if summoner.picture %}{{ root_url }}static/images/summoners/{{ summoner.picture }}{% else %}http://placehold.it/310x310{% endif %}" class="span4 thumbnail">
 
 	<div class="span6">
 		<h1>{{ summoner.name|capitalize }}</h1>
@@ -24,7 +24,7 @@
 			<h2>Wins: {{ summoner.wins }}</h2>
 			<h2>Losses: {{ summoner.losses }}</h2>
 
-			<h3>Win Percentage: {{ summoner.win_percentage }}</h3>
+			<h3>Win Percentage: {% if summoner.wins+summoner.losses != 0 %}{{ (summoner.wins/(summoner.wins + summoner.losses))*100 }}{% endif %}</h3>
 
 			<h4>Overall Rank: {{ summoner.rank }}</h4>
 		</div>
