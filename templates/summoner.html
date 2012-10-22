@@ -36,13 +36,13 @@
 	<div class="span4 info-block">
 		<div class="row-fluid">
 			<div class="span4">
-				<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_wins.thumbnail }}" class="thumbnail">
+				<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_wins.champion.thumbnail }}" class="thumbnail">
 			</div>
 			<div>
 		<h3 class="center">Most Wins</h3>
-				<h5>{{ champ_wins.champion }}</h5>
+				<h5>{{ champ_wins.champion.name }}</h5>
 				<span class="tag"># Games: </span>
-				<span class="field">{{ champ_wins.games }}</span>
+				<span class="field">{{ champ_wins.wins }}</span>
 			</div>
 		</div>
 	</div>
@@ -50,13 +50,13 @@
 	<div class="span4 info-block">
 		<div class="row-fluid">
 			<div class="span4">
-				<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_percent.thumbnail }}" class="thumbnail">
+				<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_percent.champion.thumbnail }}" class="thumbnail">
 			</div>
 			<div>
 		<h3 class="center">Highest Win Percentage</h3>
-				<h5>{{ champ_percent.champion }}</h5>
+				<h5>{{ champ_percent.champion.name }}</h5>
 				<span class="tag">Win %: </span>
-				<span class="field">{{ champ_percent.percent }}</span>
+				<span class="field">{{ (champ_percent.wins/champ_percent.games_played)*100 }}%</span>
 			</div>
 		</div>
 	</div>
@@ -64,13 +64,13 @@
 	<div class="span4 info-block">
 		<div class="row-fluid">
 			<div class="span4">
-				<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_popular.thumbnail }}" class="thumbnail">
+				<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_popular.champion.thumbnail }}" class="thumbnail">
 			</div>
 			<div>
 		<h3 class="center">Most Used</h3>
-				<h5>{{ champ_popular.champion }}</h5>
+				<h5>{{ champ_popular.champion.name }}</h5>
 				<span class="tag"># Games: </span>
-				<span class="field">{{ champ_popular.games }}</span>
+				<span class="field">{{ champ_popular.games_played }}</span>
 			</div>
 		</div>
 	</div>
@@ -79,23 +79,30 @@
 
 <h2>Recent Matches</h2>
 
-<div class="well">
+<div class="well row-fluid">
 	{% for match in matches %}
 	<a href="/game/{{ match.id }}">
-		<div class="well row {{ match.winner }} match-row">
-			<img class="champion-thumbnail" src="{{ match.team1.champion1.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team1.champion2.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team1.champion3.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team1.champion4.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team1.champion5.thumbnail }}">
+		<div class="span12 {{ match.winner }} match-row info-block">
+			<div class="row-fluid">
+				<div class="match-team span5">
+					<div class="span2"></div>
+					{% for champion in match.teams[0].champions %}
+					<img src="{{ root_url }}static/images/champions/thumbnails/{{ champion.thumbnail }}" class="thumbnail span2">
+					{% endfor %}
+				</div>
 
-			<strong>VS</strong>
+				<div class="span2">
+					Date: {{ match.date }}<br>
+					<strong>VS</strong><br>
+				</div>
 
-			<img class="champion-thumbnail" src="{{ match.team2.champion1.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team2.champion2.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team2.champion3.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team2.champion4.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team2.champion5.thumbnail }}">
+
+				<div class="match-team span5">
+					{% for champion in match.teams[1].champions %}
+					<img src="{{ root_url }}static/images/champions/thumbnails/{{ champion.thumbnail }}" class="thumbnail span2">
+					{% endfor %}
+				</div>
+			</div>
 		</div>
 	</a>
 	{% endfor %}
