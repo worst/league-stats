@@ -116,7 +116,7 @@ for champion in champions:
 						  thumbnail = champion[3],
 						  splash_art = champion[4])
 
-summoner = Summoner(summoner_name = "Kihashi", fname = "John", lname = "Cleaver", year = 2012, lolking_id = 47160)
+
 
 side1 = Side(color=1)
 side2 = Side(color=2)
