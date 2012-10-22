@@ -2,6 +2,7 @@ from flask import *
 from models import *
 import parse
 from upload import *
+from sqlalchemy import asc, desc
 
 app = Flask(__name__)
 
@@ -85,9 +86,10 @@ def summoners():
 @app.route('/summoners/<summoner_id>')
 def summoner_info(summoner_id):
     summoner = Summoner.get_by(summoner_name=summoner_id)
-    champ_popular = {}
-    champ_wins = {}
-    champ_percent = {}
+    champ_popular = Summoner_Stats.query.filter_by(summoner=summoner).order_by(asc(Summoner_Stats.games_played)).first()
+    champ_wins = Summoner_Stats.query.filter_by(summoner=summoner).order_by(asc(Summoner_Stats.wins)).first()
+    champ_percent = Summoner_Stats.query.filter_by(summoner=summoner).order_by(asc(Summoner_Stats.wins/Summoner_Stats.games_played)).first()
+    recent_matches = Game.query.order_by(asc(Game.date)).filter(Game.teams.any(Team.summoners.contains(summoner))).limit(10).all()
 
     return render_template('summoner.html',
                            page_title=summoner.summoner_name,
@@ -96,7 +98,8 @@ def summoner_info(summoner_id):
                            summoner=summoner,
                            champ_wins=champ_wins,
                            champ_percent=champ_percent,
-                           champ_popular=champ_popular)
+                           champ_popular=champ_popular,
+                           matches=recent_matches)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
