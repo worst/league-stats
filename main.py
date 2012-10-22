@@ -85,15 +85,9 @@ def summoners():
 @app.route('/summoners/<summoner_id>')
 def summoner_info(summoner_id):
     summoner = Summoner.get_by(summoner_name=summoner_id)
-    champ_popular = {'champion': 'Amumu',
-                    'thumbnail': 'AmumuSquare.png',
-                    'games': 90}
-    champ_wins = {'champion': 'Amumu',
-                    'thumbnail': 'AmumuSquare.png',
-                    'games': 100}
-    champ_percent = {'champion': 'Singed',
-                    'thumbnail': 'SingedSquare.png',
-                    'percent': 80}
+    champ_popular = {}
+    champ_wins = {}
+    champ_percent = {}
 
     return render_template('summoner.html',
                            page_title=summoner.summoner_name,
