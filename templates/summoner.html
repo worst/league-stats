@@ -79,32 +79,35 @@
 
 <h2>Recent Matches</h2>
 
-<div class="well row-fluid">
+<div class="well">
 	{% for match in matches %}
-	<a href="/game/{{ match.id }}">
-		<div class="span12 {{ match.winner }} match-row info-block">
-			<div class="row-fluid">
-				<div class="match-team span5">
-					<div class="span2"></div>
-					{% for champion in match.teams[0].champions %}
-					<img src="{{ root_url }}static/images/champions/thumbnails/{{ champion.thumbnail }}" class="thumbnail span2">
-					{% endfor %}
-				</div>
+	<div class="row-fluid">
+		<a href="/game/{{ match.id }}">
+			<div class="span12 {{ match.winner }} match-row info-block">
+				<div class="row-fluid">
+					<div class="match-team span5">
+						<div class="span2"></div>
+						{% for champion in match.teams[0].champions %}
+						<img src="{{ root_url }}static/images/champions/thumbnails/{{ champion.thumbnail }}" class="thumbnail span2">
+						{% endfor %}
+					</div>
 
-				<div class="span2">
-					Date: {{ match.date }}<br>
-					<strong>VS</strong><br>
-				</div>
+					<div class="span2">
+						Date: {{ match.date }}<br>
+						<strong>VS</strong><br>
+					</div>
 
 
-				<div class="match-team span5">
-					{% for champion in match.teams[1].champions %}
-					<img src="{{ root_url }}static/images/champions/thumbnails/{{ champion.thumbnail }}" class="thumbnail span2">
-					{% endfor %}
+					<div class="match-team span5">
+						{% for champion in match.teams[1].champions %}
+						<img src="{{ root_url }}static/images/champions/thumbnails/{{ champion.thumbnail }}" class="thumbnail span2">
+						{% endfor %}
+					</div>
 				</div>
 			</div>
-		</div>
-	</a>
+		</a>
+	</div>
+	<br>
 	{% endfor %}
 </div>
 
