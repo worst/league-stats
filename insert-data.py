@@ -103,7 +103,7 @@ champions = [["""Ahri""","""The Nine-Tailed Fox""",date(2011, 10, 14),"""AhriSqu
         ["""Warwick""","""The Blood Hunter""",date(2009, 2, 21),"""WarwickSquare.png""","""warwick.jpg"""],
         ["""Wukong""","""The Monkey King""",date(2011, 7, 26),"""WukongSquare.png""","""wukong.jpg"""],
         ["""Xerath""","""The Magus Ascendant""",date(2011, 8, 5),"""XerathSquare.png""","""xerath.jpg"""],
-        ["""Xin Zhao""","""The Seneschal of Demacia""",date(2010, 7, 13),"""XinZhaoSquare.png""","""xinzhao.jpg"""],
+        ["""XinZhao""","""The Seneschal of Demacia""",date(2010, 7, 13),"""XinZhaoSquare.png""","""xinzhao.jpg"""],
         ["""Yorick""","""The Gravedigger""",date(2011, 6, 22),"""YorickSquare.png""","""yorick.jpg"""],
         ["""Ziggs""","""The Hexplosives Expert""",date(2012, 2, 1),"""ZiggsSquare.png""","""ziggs.jpg"""],
         ["""Zilean""","""The Chronokeeper""",date(2009, 4, 18),"""ZileanSquare.png""","""zilean.jpg"""],
