@@ -11,6 +11,7 @@ class Champion(Entity):
     splash_art = Field(Text())
     rel_date = Field(Date())
     stats = OneToMany("Summoner_Stats")
+    member = ManyToOne('TeamMember')
 
     def __repr__(self):
         return '<Champion %s, %s>' % (self.name, self.title)
@@ -22,11 +23,11 @@ class Summoner(Entity):
     fname = Field(Unicode(15))
     lname = Field(Unicode(30))
     year = Field(Integer)
-    teams = ManyToMany('Team')
     picture = Field(Unicode(30))
     stats = OneToMany('Summoner_Stats')
     wins = Field(Integer, default=0)
     losses = Field(Integer, default=0)
+    member = ManyToOne('TeamMember')
 
     def __repr__(self):
         return '<%s %s (%s)>' % (self.fname, self.lname, self.summoner_name)
@@ -40,9 +41,14 @@ class Side(Entity):
 
 class Team(Entity):
     side = ManyToOne('Side')
-    summoners = ManyToMany('Summoner')
-    champions = ManyToMany('Champion')
     game = ManyToOne('Game')
+    members = OneToMany('TeamMember')
+
+
+class TeamMember(Entity):
+    summoner = OneToOne('Summoner', inverse="member")
+    champion = OneToOne('Champion', inverse="member")
+    team = ManyToOne('Team')
 
 
 class Game(Entity):
