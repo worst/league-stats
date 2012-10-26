@@ -75,8 +75,10 @@ class UploadParser:
                 summoner_stats.games_played += 1
 
             if player['team'] == 1:
-                self.team1.summoners.append(summoner)
-                self.team1.champions.append(champion)
+                TeamMember(summoner=summoner,
+                           champion=champion,
+                           team=self.team1)
             else:
-                self.team2.summoners.append(summoner)
-                self.team2.champions.append(champion)
+                TeamMember(summoner=summoner,
+                           champion=champion,
+                           team=self.team2)
