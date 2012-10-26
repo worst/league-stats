@@ -87,8 +87,8 @@
 				<div class="row-fluid">
 					<div class="match-team span5">
 						<div class="span2"></div>
-						{% for champion in match.teams[0].champions %}
-						<img src="{{ root_url }}static/images/champions/thumbnails/{{ champion.thumbnail }}" class="thumbnail span2" title="{{ champion.name }}">
+						{% for member in match.teams[0].members %}
+						<img src="{{ root_url }}static/images/champions/thumbnails/{{ member.champion.thumbnail }}" class="thumbnail span2" title="{{ member.champion.name }}">
 						{% endfor %}
 					</div>
 
@@ -99,8 +99,8 @@
 
 
 					<div class="match-team span5">
-						{% for champion in match.teams[1].champions %}
-						<img src="{{ root_url }}static/images/champions/thumbnails/{{ champion.thumbnail }}" class="thumbnail span2" title="{{ champion.name }}">
+						{% for member in match.teams[1].members %}
+						<img src="{{ root_url }}static/images/champions/thumbnails/{{ member.champion.thumbnail }}" class="thumbnail span2" title="{{ member.champion.name }}">
 						{% endfor %}
 					</div>
 				</div>
