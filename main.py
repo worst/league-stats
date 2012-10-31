@@ -28,15 +28,19 @@ def champions():
 
 @app.route('/champions/<champ>')
 def champ_info(champ):
-    champion = Champion.query.filter_by(name=champ).one()
+    champion = Champion.get_by(name=champ)
+    summoner_wins = Summoner_Stats.query.filter_by(champion=champion).order_by(asc(Summoner_Stats.wins)).first()
+    summoner_percent = Summoner_Stats.query.filter_by(champion=champion).order_by(asc(Summoner_Stats.wins/Summoner_Stats.games_played)).first()
+    recent_matches = Game.query.order_by(asc(Game.date)).filter(Game.teams.any(Team.members.any(TeamMember.champion == champion))).limit(10).all()
 
     return render_template('champion.html',
                            page_title=champ,
                            org="CWRU",
                            root_url="../../",
                            champion=champion,
-                           summoner_wins='',
-                           summoner_percent="")
+                           summoner_wins=summoner_wins,
+                           summoner_percent=summoner_percent,
+                           matches=recent_matches)
 
 
 @app.route('/league')
