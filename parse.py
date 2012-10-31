@@ -67,6 +67,9 @@ class UploadParser:
                 summoner.wins += win_count
                 summoner.losses += loss_count
 
+            champion.wins += win_count
+            champion.losses += loss_count
+
             if summoner_stats == None:
                 Summoner_Stats(summoner=summoner, champion=champion, wins=win_count, losses=loss_count, games_played=1)
             else:
