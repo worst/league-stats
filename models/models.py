@@ -10,6 +10,8 @@ class Champion(Entity):
     thumbnail = Field(Text())
     splash_art = Field(Text())
     rel_date = Field(Date())
+    wins = Field(Integer, default=0)
+    losses = Field(Integer, default=0)
     stats = OneToMany("Summoner_Stats")
     member = OneToMany('TeamMember')
 
