@@ -36,6 +36,7 @@ body {
 }
 .info-block .thumbnail {
   background-color: #FFFFFF;
+  color: #08C;
 }
 .center {
   display: block;
