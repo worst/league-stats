@@ -92,7 +92,7 @@ def summoner_info(summoner_id):
     champ_popular = Summoner_Stats.query.filter_by(summoner=summoner).order_by(asc(Summoner_Stats.games_played)).first()
     champ_wins = Summoner_Stats.query.filter_by(summoner=summoner).order_by(asc(Summoner_Stats.wins)).first()
     champ_percent = Summoner_Stats.query.filter_by(summoner=summoner).order_by(asc(Summoner_Stats.wins/Summoner_Stats.games_played)).first()
-    recent_matches = Game.query.order_by(asc(Game.date)).filter(Game.teams.any(Team.summoners.contains(summoner))).limit(10).all()
+    recent_matches = Game.query.order_by(asc(Game.date)).filter(Game.teams.any(Team.members.any(TeamMember.summoner == summoner))).limit(10).all()
 
     return render_template('summoner.html',
                            page_title=summoner.summoner_name,
