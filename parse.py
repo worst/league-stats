@@ -52,14 +52,14 @@ class UploadParser:
                           game=self.new_game)
 
         for player in self.replay_data['players']:
-            summoner = Summoner.get_by(summoner_id=player['accountID'])
+            summoner = Summoner.get_by(riot_id=player['accountID'])
             champion = Champion.get_by(riot_name=player['champion'].replace(' ', '').lower())
             win_count = 1 if player['won'] == True else 0
             loss_count = 1 if player['won'] == False else 0
             summoner_stats = Summoner_Stats.get_by(summoner=summoner, champion=champion)
 
             if summoner == None:
-                summoner = Summoner(summoner_id=player['accountID'],
+                summoner = Summoner(riot_id=player['accountID'],
                                     summoner_name=player['summoner'],
                                     wins=win_count,
                                     losses=loss_count)

@@ -90,9 +90,9 @@ def summoners():
                                root_url='../')
 
 
-@app.route('/summoners/<summoner_id>')
-def summoner_info(summoner_id):
-    summoner = Summoner.get_by(summoner_name=summoner_id)
+@app.route('/summoners/<riot_id>')
+def summoner_info(riot_id):
+    summoner = Summoner.get_by(summoner_name=riot_id)
     champ_popular = Summoner_Stats.query.filter_by(summoner=summoner).order_by(asc(Summoner_Stats.games_played)).first()
     champ_wins = Summoner_Stats.query.filter_by(summoner=summoner).order_by(asc(Summoner_Stats.wins)).first()
     champ_percent = Summoner_Stats.query.filter_by(summoner=summoner).order_by(asc(Summoner_Stats.wins/Summoner_Stats.games_played)).first()

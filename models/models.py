@@ -22,7 +22,7 @@ class Champion(Entity):
 
 class Summoner(Entity):
     summoner_name = Field(Unicode(30))
-    summoner_id = Field(Integer)
+    riot_id = Field(Integer)
     fname = Field(Unicode(15))
     lname = Field(Unicode(30))
     year = Field(Integer)
