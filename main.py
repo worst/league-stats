@@ -45,27 +45,24 @@ def champ_info(champ):
 
 @app.route('/league')
 def league():
-    most_wins = {'summoner': 'Kihashi',
-                 'wins': 500}
-    percentage = {'summoner': 'PuddinPop',
-                  'wins': 60}
-    games = {'summoner': "ONLY MID THX",
-             'number': 10000}
-    most_popular = {'champion': 'Amumu',
-                    'thumbnail': 'AmumuSquare.png',
-                    'games': 100}
-    winningest = {'champion': 'Singed',
-                  'thumbnail': 'SingedSquare.png',
-                  'percent': 80}
+    summoner_wins = Summoner.query.order_by(desc(Summoner.wins)).first()
+    summoner_percent = Summoner.query.order_by(desc(Summoner.wins / (Summoner.wins + Summoner.losses))).first()
+    summoner_games = Summoner.query.order_by(desc(Summoner.wins + Summoner.losses)).first()
+    champ_wins = Champion.query.order_by(desc(Champion.wins)).first()
+    champ_percent = Champion.query.order_by(desc(Champion.wins / (Champion.wins + Champion.losses))).first()
+    champ_popular = Champion.query.order_by(desc(Champion.wins + Champion.losses)).first()
+    recent_matches = Game.query.order_by(desc(Game.date)).limit(10).all()
 
     return render_template('league.html',
                            page_title="League Statistics",
                            org="CWRU", root_url="../",
-                           most_wins=most_wins,
-                           percentage=percentage,
-                           games=games,
-                           most_popular=most_popular,
-                           winningest=winningest)
+                           summoner_wins=summoner_wins,
+                           summoner_percent=summoner_percent,
+                           summoner_games=summoner_games,
+                           champ_wins=champ_wins,
+                           champ_percent=champ_percent,
+                           champ_popular=champ_popular,
+                           matches=recent_matches)
 
 
 @app.route('/summoners', methods=['GET', 'POST'])
