@@ -18,24 +18,36 @@
 <h2>Top Summoners</h2>
 <div id="wins" class="row-fluid">
 	<div class="span4 info-block">
-		<h3>Most Wins</h3>
-		<h5>{{ most_wins.summoner }}</h5>
-		<span class="tag">Wins: </span>
-		<span class="field">{{ most_wins.wins }}</span>
+		<a href="{{ root_url }}summoners/{{ summoner_wins.summoner_name }}">
+			<div class="">
+				<h3>Top Summoner by Wins</h3>
+
+				<p><strong> Name: </strong>{{ summoner_wins.summoner_name }}</p>
+				<p><strong> Wins: </strong>{{ summoner_wins.wins }}</p>
+			</div>
+		</a>
 	</div>
 
 	<div class="span4 info-block">
-		<h3>Highest Win Percentage</h3>
-		<h5>{{ percentage.summoner }}</h5>
-		<span class="tag">Win Percentage: </span>
-		<span class="field">{{ percentage.wins }}</span>
+		<a href="{{ root_url }}summoners/{{ summoner_percent.summoner_name }}">
+			<div class="">
+				<h3>Top Summoner by Percentage</h3>
+
+				<p><strong> Name: </strong>{{ summoner_percent.summoner_name }}</p>
+				<p><strong> Win Percentage: </strong>{% if summoner_percent.losses != 0 %}{{ (summoner_percent.wins/(summoner_percent.wins/summoner_percent.losses))*100 }}{% else %}100{% endif %}%</p>
+			</div>
+		</a>
 	</div>
 
 	<div class="span4 info-block">
-		<h3>Most Games</h3>
-		<h5>{{ games.summoner }}</h5>
-		<span class="tag"># Games: </span>
-		<span class="field">{{ games.number }}</span>
+		<a href="{{ root_url }}summoners/{{ summoner_games.summoner_name }}">
+			<div class="">
+				<h3>Top Summoner by Games Played</h3>
+
+				<p><strong> Name: </strong>{{ summoner_games.summoner_name }}</p>
+				<p><strong> Games: </strong>{{ summoner_games.wins + summoner_games.losses }}</p>
+			</div>
+		</a>
 	</div>
 </div>
 <br>
@@ -43,32 +55,53 @@
 <h2>Top Champions</h2>
 <div id="champions" class="row-fluid">
 	<div class="span4 info-block">
-		<div class="row-fluid">
-			<div class="span4">
-				<img src="{{ root_url }}static/images/champions/thumbnails/{{ most_popular.thumbnail }}" class="thumbnail">
+		<a href="{{ root_url }}champions/{{ champ_wins.name }}">
+			<div class="row-fluid">
+				<div class="span4">
+					<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_wins.thumbnail }}" class="thumbnail">
+				</div>
+				<div>
+			<h3 class="center">Most Wins</h3>
+					<h5>{{ champ_wins.name }}</h5>
+					<span class="tag"># Games: </span>
+					<span class="field">{{ champ_wins.wins }}</span>
+				</div>
 			</div>
-			<div>
-		<h3 class="center">Most Popular</h3>
-				<h5>{{ most_popular.champion }}</h5>
-				<span class="tag"># Games: </span>
-				<span class="field">{{ most_popular.games }}</span>
-			</div>
-		</div>
+		</a>
 	</div>
 
-	<div class="span4 offset4 info-block">
-		<div class="row-fluid">
-			<div class="span4">
-				<img src="{{ root_url }}static/images/champions/thumbnails/{{ winningest.thumbnail }}" class="thumbnail">
+	<div class="span4 info-block">
+		<a href="{{ root_url }}champions/{{ champ_percent.name }}">
+			<div class="row-fluid">
+				<div class="span4">
+					<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_percent.thumbnail }}" class="thumbnail">
+				</div>
+				<div>
+			<h3 class="center">Highest Win Percentage</h3>
+					<h5>{{ champ_percent.name }}</h5>
+					<span class="tag">Win %: </span>
+					<span class="field">{% if champ_percent.losses != 0 %}{{ (champ_percent.wins/(champ_percent.wins/champ_percent.losses))*100 }}{% else %}100{% endif %}%</span>
+				</div>
 			</div>
-			<div>
-		<h3 class="center">Winningest</h3>
-				<h5>{{ winningest.champion }}</h5>
-				<span class="tag">Win %: </span>
-				<span class="field">{{ winningest.percent }}</span>
-			</div>
-		</div>
+		</a>
 	</div>
+
+	<div class="span4 info-block">
+		<a href="{{ root_url }}champions/{{ champ_popular.name }}">
+			<div class="row-fluid">
+				<div class="span4">
+					<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_popular.thumbnail }}" class="thumbnail">
+				</div>
+				<div>
+			<h3 class="center">Most Used</h3>
+					<h5>{{ champ_popular.name }}</h5>
+					<span class="tag"># Games: </span>
+					<span class="field">{{ champ_popular.wins + champ_popular.losses }}</span>
+				</div>
+			</div>
+		</a>
+	</div>
+
 </div>
 <br>
 
@@ -76,24 +109,33 @@
 
 <div class="well">
 	{% for match in matches %}
-	<a href="/game/{{ match.id }}">
-		<div class="well row {{ match.winner }} match-row">
-			<img class="champion-thumbnail" src="{{ match.team1.champion1.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team1.champion2.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team1.champion3.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team1.champion4.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team1.champion5.thumbnail }}">
+	<div class="row-fluid">
+		<a href="/game/{{ match.id }}">
+			<div class="span12 {{ match.winner }} match-row info-block">
+				<div class="row-fluid">
+					<div class="match-team span5">
+						<div class="span2"></div>
+						{% for member in match.teams[0].members %}
+						<img src="{{ root_url }}static/images/champions/thumbnails/{{ member.champion.thumbnail }}" class="thumbnail span2" title="{{ member.champion.name }}">
+						{% endfor %}
+					</div>
 
-			<strong>VS</strong>
+					<div class="span2">
+						Date: {{ match.date }}<br>
+						<strong>VS</strong><br>
+					</div>
 
-			<img class="champion-thumbnail" src="{{ match.team2.champion1.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team2.champion2.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team2.champion3.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team2.champion4.thumbnail }}">
-			<img class="champion-thumbnail" src="{{ match.team2.champion5.thumbnail }}">
-		</div>
-	</a>
+
+					<div class="match-team span5">
+						{% for member in match.teams[1].members %}
+						<img src="{{ root_url }}static/images/champions/thumbnails/{{ member.champion.thumbnail }}" class="thumbnail span2" title="{{ member.champion.name }}">
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+	<br>
 	{% endfor %}
 </div>
-
 {% endblock %}
