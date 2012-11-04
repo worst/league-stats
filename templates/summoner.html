@@ -11,7 +11,7 @@
 
 	<div class="span6">
 		<h1>{{ summoner.name|capitalize }}</h1>
-		<p><strong>LoL King Profile: </strong><a href="http://www.lolking.net/summoner/na/{{ summoner.summoner_id }}">http://www.lolking.net/summoner/na/{{ summoner.summoner_id }}</a></p>
+		<p><strong>LoL King Profile: </strong><a href="http://www.lolking.net/summoner/na/{{ summoner.riot_id }}">http://www.lolking.net/summoner/na/{{ summoner.riot_id }}</a></p>
 	</div>
 </div>
 <br>
@@ -34,45 +34,51 @@
 <h2>Top Champions</h2>
 <div class="row-fluid">
 	<div class="span4 info-block">
-		<div class="row-fluid">
-			<div class="span4">
-				<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_wins.champion.thumbnail }}" class="thumbnail">
+		<a href="{{ root_url }}champions/{{ champ_wins.champion.name }}">
+			<div class="row-fluid">
+				<div class="span4">
+					<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_wins.champion.thumbnail }}" class="thumbnail">
+				</div>
+				<div>
+			<h3 class="center">Most Wins</h3>
+					<h5>{{ champ_wins.champion.name }}</h5>
+					<span class="tag"># Games: </span>
+					<span class="field">{{ champ_wins.wins }}</span>
+				</div>
 			</div>
-			<div>
-		<h3 class="center">Most Wins</h3>
-				<h5>{{ champ_wins.champion.name }}</h5>
-				<span class="tag"># Games: </span>
-				<span class="field">{{ champ_wins.wins }}</span>
-			</div>
-		</div>
+		</a>
 	</div>
 
 	<div class="span4 info-block">
-		<div class="row-fluid">
-			<div class="span4">
-				<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_percent.champion.thumbnail }}" class="thumbnail">
+		<a href="{{ root_url }}champions/{{ champ_percent.champion.name }}">
+			<div class="row-fluid">
+				<div class="span4">
+					<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_percent.champion.thumbnail }}" class="thumbnail">
+				</div>
+				<div>
+			<h3 class="center">Highest Win Percentage</h3>
+					<h5>{{ champ_percent.champion.name }}</h5>
+					<span class="tag">Win %: </span>
+					<span class="field">{{ (champ_percent.wins/champ_percent.games_played)*100 }}%</span>
+				</div>
 			</div>
-			<div>
-		<h3 class="center">Highest Win Percentage</h3>
-				<h5>{{ champ_percent.champion.name }}</h5>
-				<span class="tag">Win %: </span>
-				<span class="field">{{ (champ_percent.wins/champ_percent.games_played)*100 }}%</span>
-			</div>
-		</div>
+		</a>
 	</div>
 
 	<div class="span4 info-block">
-		<div class="row-fluid">
-			<div class="span4">
-				<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_popular.champion.thumbnail }}" class="thumbnail">
+		<a href="{{ root_url }}champions/{{ champ_popular.champion.name }}">
+			<div class="row-fluid">
+				<div class="span4">
+					<img src="{{ root_url }}static/images/champions/thumbnails/{{ champ_popular.champion.thumbnail }}" class="thumbnail">
+				</div>
+				<div>
+			<h3 class="center">Most Used</h3>
+					<h5>{{ champ_popular.champion.name }}</h5>
+					<span class="tag"># Games: </span>
+					<span class="field">{{ champ_popular.games_played }}</span>
+				</div>
 			</div>
-			<div>
-		<h3 class="center">Most Used</h3>
-				<h5>{{ champ_popular.champion.name }}</h5>
-				<span class="tag"># Games: </span>
-				<span class="field">{{ champ_popular.games_played }}</span>
-			</div>
-		</div>
+		</a>
 	</div>
 </div>
 <br>
