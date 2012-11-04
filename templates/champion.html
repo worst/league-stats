@@ -37,25 +37,25 @@
 
 <div class="row-fluid top-summoners">
 	<div class="span4 info-block">
-		<!-- <a href="summoners/{{ summoner_wins.name }}"> -->
+		<a href="{{ root_url }}summoners/{{ summoner_wins.summoner.summoner_name }}">
 			<div class="">
 				<h3>Top Summoner by Wins</h3>
 
 				<p><strong> Name: </strong>{{ summoner_wins.summoner.summoner_name }}</p>
 				<p><strong> Wins: </strong>{{ summoner_wins.wins }}</p>
 			</div>
-		<!-- </a> -->
+		</a>
 	</div>
 
 	<div class="span4 offset4 info-block">
-		<!-- <a href="summoners/{{ summoner_percent.name }}"> -->
+		<a href="{{ root_url }}summoners/{{ summoner_percent.summoner.summoner_name }}">
 			<div class="">
 				<h3>Top Summoner by Percentage</h3>
 
 				<p><strong> Name: </strong>{{ summoner_percent.summoner.summoner_name }}</p>
 				<p><strong> Win Percentage: </strong>{{ (summoner_percent.wins/summoner_percent.games_played)*100 }}%</p>
 			</div>
-		<!-- </a> -->
+		</a>
 	</div>
 </div>
 
