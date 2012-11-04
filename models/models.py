@@ -6,6 +6,7 @@ metadata.bind.echo = True
 
 class Champion(Entity):
     name = Field(Unicode(20))
+    riot_name = Field(Unicode(30))
     title = Field(Unicode(30))
     thumbnail = Field(Text())
     splash_art = Field(Text())
