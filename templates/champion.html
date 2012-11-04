@@ -37,25 +37,29 @@
 
 <div class="row-fluid top-summoners">
 	<div class="span4 info-block">
+		{% if summoner_wins %}
 		<a href="{{ root_url }}summoners/{{ summoner_wins.summoner.summoner_name }}">
-			<div class="">
-				<h3>Top Summoner by Wins</h3>
+		{% endif %}
+			<h3>Top Summoner by Wins</h3>
 
-				<p><strong> Name: </strong>{{ summoner_wins.summoner.summoner_name }}</p>
-				<p><strong> Wins: </strong>{{ summoner_wins.wins }}</p>
-			</div>
+		{% if summoner_wins %}
+			<p><strong> Name: </strong>{{ summoner_wins.summoner.summoner_name }}</p>
+			<p><strong> Wins: </strong>{{ summoner_wins.wins }}</p>
 		</a>
+		{% endif %}
 	</div>
 
 	<div class="span4 offset4 info-block">
+		{% if summoner_percent %}
 		<a href="{{ root_url }}summoners/{{ summoner_percent.summoner.summoner_name }}">
-			<div class="">
-				<h3>Top Summoner by Percentage</h3>
+		{%endif %}
+			<h3>Top Summoner by Percentage</h3>
 
-				<p><strong> Name: </strong>{{ summoner_percent.summoner.summoner_name }}</p>
-				<p><strong> Win Percentage: </strong>{{ (summoner_percent.wins/summoner_percent.games_played)*100 }}%</p>
-			</div>
+		{% if summoner_percent %}
+			<p><strong> Name: </strong>{{ summoner_percent.summoner.summoner_name }}</p>
+			<p><strong> Win Percentage: </strong>{{ (summoner_percent.wins/summoner_percent.games_played)*100 }}%</p>
 		</a>
+		{% endif %}
 	</div>
 </div>
 
