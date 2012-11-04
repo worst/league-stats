@@ -29,9 +29,9 @@ def champions():
 @app.route('/champions/<champ>')
 def champ_info(champ):
     champion = Champion.get_by(name=champ)
-    summoner_wins = Summoner_Stats.query.filter_by(champion=champion).order_by(asc(Summoner_Stats.wins)).first()
-    summoner_percent = Summoner_Stats.query.filter_by(champion=champion).order_by(asc(Summoner_Stats.wins/Summoner_Stats.games_played)).first()
-    recent_matches = Game.query.order_by(asc(Game.date)).filter(Game.teams.any(Team.members.any(TeamMember.champion == champion))).limit(10).all()
+    summoner_wins = Summoner_Stats.query.filter_by(champion=champion).order_by(desc(Summoner_Stats.wins)).first()
+    summoner_percent = Summoner_Stats.query.filter_by(champion=champion).order_by(desc(Summoner_Stats.wins/Summoner_Stats.games_played)).first()
+    recent_matches = Game.query.order_by(desc(Game.date)).filter(Game.teams.any(Team.members.any(TeamMember.champion == champion))).limit(10).all()
 
     return render_template('champion.html',
                            page_title=champ,
@@ -90,10 +90,10 @@ def summoners():
 @app.route('/summoners/<riot_id>')
 def summoner_info(riot_id):
     summoner = Summoner.get_by(summoner_name=riot_id)
-    champ_popular = Summoner_Stats.query.filter_by(summoner=summoner).order_by(asc(Summoner_Stats.games_played)).first()
-    champ_wins = Summoner_Stats.query.filter_by(summoner=summoner).order_by(asc(Summoner_Stats.wins)).first()
-    champ_percent = Summoner_Stats.query.filter_by(summoner=summoner).order_by(asc(Summoner_Stats.wins/Summoner_Stats.games_played)).first()
-    recent_matches = Game.query.order_by(asc(Game.date)).filter(Game.teams.any(Team.members.any(TeamMember.summoner == summoner))).limit(10).all()
+    champ_popular = Summoner_Stats.query.filter_by(summoner=summoner).order_by(desc(Summoner_Stats.games_played)).first()
+    champ_wins = Summoner_Stats.query.filter_by(summoner=summoner).order_by(desc(Summoner_Stats.wins)).first()
+    champ_percent = Summoner_Stats.query.filter_by(summoner=summoner).order_by(desc(Summoner_Stats.wins/Summoner_Stats.games_played)).first()
+    recent_matches = Game.query.order_by(desc(Game.date)).filter(Game.teams.any(Team.members.any(TeamMember.summoner == summoner))).limit(10).all()
 
     return render_template('summoner.html',
                            page_title=summoner.summoner_name,
