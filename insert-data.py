@@ -113,6 +113,7 @@ champions = [["""Ahri""","""The Nine-Tailed Fox""",date(2011, 10, 14),"""AhriSqu
 
 for champion in champions:
 	champ_data = Champion(name = champion[0],
+                          riot_name = champion[0].replace(' ', '').replace("'", "").lower(),
 						  title = champion[1],
 						  rel_date = champion[2],
 						  thumbnail = champion[3],
