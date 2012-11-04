@@ -38,6 +38,9 @@ body {
   background-color: #FFFFFF;
   color: #08C;
 }
+.info-block a {
+  color: white;
+}
 .center {
   display: block;
   margin: 0 auto !important;
