@@ -1,8 +1,12 @@
 from jinja2 import *
 import datetime
 
+date_format = "%m/%d/%Y"
+
 
 def length(seconds):
     return str(datetime.timedelta(seconds=seconds))
 
-environment.filters['gamelength'] = length
+
+def date(date_time):
+    return date_time.strftime(date_format)
