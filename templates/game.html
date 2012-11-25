@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+	<h1>Game Information</h1>
+</div>
+
+<div class="row-fluid">
+	<div class="span4">
+		<span>Game Length: </span>
+		<span>{{ game.length|gamelength }}</span>
+	</div>
+	<div class="span4">
+		<span>Game Date: </span>
+		<span>{{ game.date|date }}</span>
+	</div>
+	<a href="{{ root_url }}{{ game.replay_path }}">
+		<div class="span4 btn">
+			<span> Download Replay </span>
+		</div>
+	</a>
+</div>
+<br>
+<div class="row-fluid">
+	<div class="span12 well">
+		<div class="row-fluid">
+			<div class="span6 label label-{% if game.winner == game.teams[0].side %}success{% else %}important{% endif %}">
+				<h3>{% if game.teams[0].side.color == 1 %}Purple{% else %}Blue{% endif %} Side </h3>
+				{% for member in game.teams[0].members %}
+				<div class="row-fluid">
+					<div class="span2 offset2">
+						<img src="{{ root_url }}static/images/champions/thumbnails/{{ member.champion.thumbnail }}" title="{{ member.champion.name }}">
+					</div>
+					<div class="span8">
+						<p>{{ member.summoner.summoner_name }}</p>
+					</div>
+				</div>
+				{% endfor %}
+				<br>
+			</div>
+
+			<div class="span6 label label-{% if game.winner == game.teams[1].side %}success{% else %}important{% endif %}">
+				<h3>{% if game.teams[1].side.color == 1 %}Purple{% else %}Blue{% endif %} Side </h3>
+				{% for member in game.teams[1].members %}
+				<div class="row-fluid">
+					<div class="span2 offset2">
+						<img src="{{ root_url }}static/images/champions/thumbnails/{{ member.champion.thumbnail }}" title="{{ member.champion.name }}">
+					</div>
+					<div class="span8">
+						<p>{{ member.summoner.summoner_name }}</p>
+					</div>
+				</div>
+				{% endfor %}
+				<br>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
