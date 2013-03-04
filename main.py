@@ -133,6 +133,34 @@ def start_upload():
             return "Upload Failed. Please try it again."
 
 
+@app.route('/games', methods=['GET', 'POST'])
+def game_search():
+    if request.method == 'GET':
+        return render_template('game-search.html',
+                               page_title="Game Search",
+                               org="CWRU",
+                               root_url="../")
+    else:
+        search = request.form['search-term']
+
+        
+        return render_template('game-search-results.html',
+                               page_title="Game Search",
+
+                               org="CWRU",
+                               root_url="../")
+
+
+@app.route('/games/<game_id>')
+def game(game_id):
+    game = Game.get_by(id=game_id)
+    return render_template('game.html',
+                         page_title="Game Info",
+                         org="CWRU",
+                         root_url="../",
+                         game=game)
+
+
 if __name__ == '__main__':
     setup_all()
     create_all()
