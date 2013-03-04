@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+	<h1>Game Search</h1>
+</div>
+
+<p>To check out a game's statistics, enter its date below.</p>
+
+<div class="row-fluid">
+	<form action="" class="center form-search well span4" method="post">
+		<div class="row-fluid">
+			<div class="center">
+			<input type="date" class="search-query input-medium" name="search-term" value="{{ search }}">
+			<button type="submit" class="btn btn-large">Search</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+{% block search_results %}{% endblock %}
+
+
+{% endblock %}
