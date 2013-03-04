@@ -3,9 +3,13 @@ from models import *
 import parse
 from upload import *
 from sqlalchemy import asc, desc
+from filters import *
 
 app = Flask(__name__)
 
+# Setup all Custom Filters
+app.jinja_env.filters['gamelength'] = length
+app.jinja_env.filters['date'] = date
 
 @app.route('/')
 def index():
